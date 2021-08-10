@@ -8,6 +8,16 @@ class Item {
     this.detailedData = detailedData;
   }
 }
+class InputModel {
+  constructor(title, type, dropDownData) {
+    this.title = title;
+    this.type = type;
+    this.dropDownData = dropDownData;
+  }
+}
+
+export const NUMERIC_INPUT = 'numeric';
+export const DROPDOWN_INPUT = 'drop-down';
 
 export default DATA = [
   new Item(
@@ -15,7 +25,11 @@ export default DATA = [
     'EMI calculator',
     'Wish to calculate the monthly EMI of your loan? Calculate here.',
     'https://via.placeholder.com/150.png',
-    ['Loan Amount', 'Loan Tenure', 'Interest Rate(P.A)'],
+    [
+      new InputModel('Loan Amount', NUMERIC_INPUT, null),
+      new InputModel('Loan Tenure', NUMERIC_INPUT, null),
+      new InputModel('Interest Rate(P.A)', NUMERIC_INPUT, null),
+    ],
     "Congratulations, you've reached the end of our first JS objects article — you should now have a good idea of how to work with objects in JavaScript — including creating your own simple objects. You should also appreciate that objects are very useful as structures for storing related data and functionality — if you tried to keep track of all the properties and methods in our person object as separate variables and functions, it would be inefficient and frustrating, and we'd run the risk of clashing with other variables and functions that have the same names. Objects let us keep the information safely locked away in their own package, out of harm's way.",
   ),
   new Item(
@@ -24,9 +38,13 @@ export default DATA = [
     'Wish to invest periodically? Calculate the amount of wealth that you can generate',
     'https://via.placeholder.com/150.png',
     [
-      'Investment Amount',
-      'Expected rate of return (P.A)',
-      'Tenure (in years) ',
+      new InputModel('Frequency of Investment', DROPDOWN_INPUT, [
+        { value: 'year', label: 'Yearly' },
+        { value: 'month', label: 'Monthly' },
+      ]),
+      new InputModel('Investment Amount ', NUMERIC_INPUT, null),
+      new InputModel('Expected rate of return (P.A) ', NUMERIC_INPUT, null),
+      new InputModel('Tenure (in years)', NUMERIC_INPUT, null),
     ],
     "Congratulations, you've reached the end of our first JS objects article — you should now have a good idea of how to work with objects in JavaScript — including creating your own simple objects. You should also appreciate that objects are very useful as structures for storing related data and functionality — if you tried to keep track of all the properties and methods in our person object as separate variables and functions, it would be inefficient and frustrating, and we'd run the risk of clashing with other variables and functions that have the same names. Objects let us keep the information safely locked away in their own package, out of harm's way.",
   ),
@@ -35,7 +53,11 @@ export default DATA = [
     'One time Investment',
     'making a Lumpsum investment? Calculate the future value of your wealth',
     'https://via.placeholder.com/150.png',
-    ['Investment Amount', 'Expected rate of return (P.A)', 'Tenure (in years)'],
+    [
+      new InputModel('Investment Amount', NUMERIC_INPUT, null),
+      new InputModel('Expected rate of return (P.A)', NUMERIC_INPUT, null),
+      new InputModel('Tenure (in years)', NUMERIC_INPUT, null),
+    ],
     "Congratulations, you've reached the end of our first JS objects article — you should now have a good idea of how to work with objects in JavaScript — including creating your own simple objects. You should also appreciate that objects are very useful as structures for storing related data and functionality — if you tried to keep track of all the properties and methods in our person object as separate variables and functions, it would be inefficient and frustrating, and we'd run the risk of clashing with other variables and functions that have the same names. Objects let us keep the information safely locked away in their own package, out of harm's way.",
   ),
   new Item(
@@ -43,7 +65,11 @@ export default DATA = [
     'Goal Planning - Lumpsum',
     'Wish to invest once and make wealth? Calculate the Investment Amount',
     'https://via.placeholder.com/150.png',
-    ['Targeted Wealth', 'Expected rate of return (P.A)', 'Tenure (in years)'],
+    [
+      new InputModel('Targeted Wealth', NUMERIC_INPUT, null),
+      new InputModel('Expected rate of return (P.A)', NUMERIC_INPUT, null),
+      new InputModel('Tenure (in years)', NUMERIC_INPUT, null),
+    ],
     "Congratulations, you've reached the end of our first JS objects article — you should now have a good idea of how to work with objects in JavaScript — including creating your own simple objects. You should also appreciate that objects are very useful as structures for storing related data and functionality — if you tried to keep track of all the properties and methods in our person object as separate variables and functions, it would be inefficient and frustrating, and we'd run the risk of clashing with other variables and functions that have the same names. Objects let us keep the information safely locked away in their own package, out of harm's way.",
   ),
   new Item(
@@ -52,10 +78,10 @@ export default DATA = [
     'Wish to increase your SIP Investment Amount annually? Calculate your returns',
     'https://via.placeholder.com/150.png',
     [
-      'Monthly Investment Amount',
-      'Growth in Investment Amount(P.A)(in %)',
-      'Expected Return(P.A)(in %)',
-      'Tenure(In Years)(Up to 50 years)',
+      new InputModel('Monthly Investment Amount', NUMERIC_INPUT, null),
+      new InputModel('Growth % in Investment Amount(P.A)', NUMERIC_INPUT, null),
+      new InputModel('Expected Return %(P.A)', NUMERIC_INPUT, null),
+      new InputModel('Tenure (In Years)', NUMERIC_INPUT, null),
     ],
     "Congratulations, you've reached the end of our first JS objects article — you should now have a good idea of how to work with objects in JavaScript — including creating your own simple objects. You should also appreciate that objects are very useful as structures for storing related data and functionality — if you tried to keep track of all the properties and methods in our person object as separate variables and functions, it would be inefficient and frustrating, and we'd run the risk of clashing with other variables and functions that have the same names. Objects let us keep the information safely locked away in their own package, out of harm's way.",
   ),

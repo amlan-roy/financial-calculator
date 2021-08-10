@@ -2,10 +2,9 @@ import React, { useState } from 'react';
 import { View, StyleSheet, Text, Image, FlatList } from 'react-native';
 import Input from '../components/Input';
 import Background from '../components/Background';
-
+import DropDownPicker from 'react-native-dropdown-picker';
 import ResultCard from '../components/ResultCard';
 import CustomButton from '../components/CustomButton';
-
 import DATA from '../data/Data';
 import Colors from '../constants/Colors';
 
@@ -13,10 +12,16 @@ const renderItem = (itemData) => {
   return (
     <View style={styles.inputContainer}>
       <Input
-        inputTitle={itemData.item}
+        inputTitle={itemData.item.title}
         titleStyle={styles.inputTitle}
         inputStyle={styles.inputText}
         keyboardType="decimal-pad"
+        type={itemData.item.type}
+        dropDownData={itemData.item.dropDownData}
+        dropDownStyle={styles.dropDownStyle}
+        dropDownContainerStyle={styles.dropDownContainerStyle}
+        dropDownDisabledStyle={styles.dropDownDisabledStyle}
+        dropDownTextStyle={styles.dropDownTextStyle}
       />
     </View>
   );
@@ -27,6 +32,9 @@ const CalculatorScreen = (props) => {
   const description = props.route.params.description;
   const id = props.route.params.id;
   const Data = DATA[id - 1].inputs;
+
+  const onValueChange = () => {};
+  //item pickers configs
 
   return (
     <Background>
