@@ -46,7 +46,7 @@ const CalculatorScreen = (props) => {
       <View style={styles.imageAndLearnMoreContainer}>
         <Image
           style={styles.imageStyle}
-          source={{ uri: 'https://via.placeholder.com/150.png' }}
+          source={{ uri: props.route.params.url }}
         />
         <View style={styles.learnMoreContainer}>
           <CustomButton

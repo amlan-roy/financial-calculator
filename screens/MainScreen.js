@@ -18,11 +18,12 @@ import Background from '../components/Background';
 const MainScreen = (props) => {
   const windowWidth = Dimensions.get('window').width;
 
-  const toCalculator = (title, description, id) => {
+  const toCalculator = (title, description, id, url) => {
     props.navigation.navigate('Calculator', {
       title: title,
       description: description,
       id: id,
+      url: url,
     });
   };
 
@@ -38,6 +39,7 @@ const MainScreen = (props) => {
           itemData.item.title,
           itemData.item.description,
           itemData.item.id,
+          itemData.item.imageUrl,
         )}
       />
     );

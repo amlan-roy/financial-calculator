@@ -24,7 +24,7 @@ export default DATA = [
     1,
     'EMI calculator',
     'Wish to calculate the monthly EMI of your loan? Calculate here.',
-    'https://via.placeholder.com/150.png',
+    'https://images.pexels.com/photos/5386754/pexels-photo-5386754.jpeg',
     [
       new InputModel('Loan Amount', NUMERIC_INPUT, null),
       new InputModel('Loan Tenure', NUMERIC_INPUT, null),
@@ -36,7 +36,7 @@ export default DATA = [
     2,
     'SIP calculator',
     'Wish to invest periodically? Calculate the amount of wealth that you can generate',
-    'https://via.placeholder.com/150.png',
+    'https://images.pexels.com/photos/3943716/pexels-photo-3943716.jpeg',
     [
       new InputModel('Frequency of Investment', DROPDOWN_INPUT, [
         { value: 'year', label: 'Yearly' },
@@ -52,7 +52,7 @@ export default DATA = [
     3,
     'One time Investment',
     'making a Lumpsum investment? Calculate the future value of your wealth',
-    'https://via.placeholder.com/150.png',
+    'https://images.pexels.com/photos/164652/pexels-photo-164652.jpeg',
     [
       new InputModel('Investment Amount', NUMERIC_INPUT, null),
       new InputModel('Expected rate of return (P.A)', NUMERIC_INPUT, null),
@@ -64,7 +64,7 @@ export default DATA = [
     4,
     'Goal Planning - Lumpsum',
     'Wish to invest once and make wealth? Calculate the Investment Amount',
-    'https://via.placeholder.com/150.png',
+    'https://images.pexels.com/photos/6620429/pexels-photo-6620429.jpeg',
     [
       new InputModel('Targeted Wealth', NUMERIC_INPUT, null),
       new InputModel('Expected rate of return (P.A)', NUMERIC_INPUT, null),
@@ -76,7 +76,7 @@ export default DATA = [
     5,
     'Step-Up Calculator',
     'Wish to increase your SIP Investment Amount annually? Calculate your returns',
-    'https://via.placeholder.com/150.png',
+    'https://images.pexels.com/photos/6858677/pexels-photo-6858677.jpeg',
     [
       new InputModel('Monthly Investment Amount', NUMERIC_INPUT, null),
       new InputModel('Growth % in Investment Amount(P.A)', NUMERIC_INPUT, null),
