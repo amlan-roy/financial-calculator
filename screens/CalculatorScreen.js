@@ -6,10 +6,12 @@ import ResultCard from '../components/ResultCard';
 import CustomButton from '../components/CustomButton';
 import DATA from '../data/Data';
 import Colors from '../constants/Colors';
+import calculator from '../calculatorFunctions/Calculators';
 
 const CalculatorScreen = (props) => {
   const [buttonPressed, setButtonPressed] = useState(false);
   const [isEmpty, setIsEmpty] = useState(false);
+  const [resultData, setResultData] = useState([]);
   // setting the first value of "inputValues" as the id of the card/calculator
   // that we are visiting
   const [inputValues, setInputValues] = useState({ id: props.route.params.id });
@@ -39,6 +41,11 @@ const CalculatorScreen = (props) => {
         />
       </View>
     );
+  };
+
+  const buttonPressHandler = () => {
+    setButtonPressed(true);
+    setResultData(calculator(inputValues));
   };
 
   return (
@@ -74,14 +81,12 @@ const CalculatorScreen = (props) => {
       <View style={styles.buttonContainer}>
         <CustomButton
           title="Calculate"
-          onPress={() => {
-            setButtonPressed((state) => !state);
-          }}
+          onPress={buttonPressHandler}
           buttonStyle={styles.button}
           textStyle={{ color: 'black' }}
         />
       </View>
-      {buttonPressed && <ResultCard />}
+      {buttonPressed && <ResultCard resultData={resultData} />}
     </Background>
   );
 };
