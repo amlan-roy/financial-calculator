@@ -44,7 +44,7 @@ export default DATA = [
       ]),
       new InputModel('Investment Amount ', NUMERIC_INPUT, null),
       new InputModel('Expected rate of return (P.A) ', NUMERIC_INPUT, null),
-      new InputModel('Tenure', NUMERIC_INPUT, null),
+      new InputModel('Tenure (Years)', NUMERIC_INPUT, null),
     ],
     "Congratulations, you've reached the end of our first JS objects article — you should now have a good idea of how to work with objects in JavaScript — including creating your own simple objects. You should also appreciate that objects are very useful as structures for storing related data and functionality — if you tried to keep track of all the properties and methods in our person object as separate variables and functions, it would be inefficient and frustrating, and we'd run the risk of clashing with other variables and functions that have the same names. Objects let us keep the information safely locked away in their own package, out of harm's way.",
   ),
