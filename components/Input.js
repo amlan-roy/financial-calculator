@@ -11,8 +11,16 @@ const Input = (props) => {
   const [value, setValue] = useState(
     props.dropDownData !== null ? props.dropDownData[0].value : '',
   );
+  const [isEmpty, setIsEmpty] = useState(false);
+  const [isTouched, setIsTouched] = useState(false);
   //change handler function to set the values in the internal states
   const changeHandler = (input) => {
+    setIsTouched(true);
+    if (input === '') {
+      setIsEmpty(true);
+    } else {
+      setIsEmpty(false);
+    }
     if (props.type == NUMERIC_INPUT) {
       setText(input);
     } else {
@@ -20,6 +28,7 @@ const Input = (props) => {
     }
   };
   //two useEffects handlers for passing the values to the calculator screen
+
   useEffect(() => {
     props.onValueChange(text);
   }, [text]);
@@ -43,6 +52,9 @@ const Input = (props) => {
             ...props.inputStyle,
           }}
         />
+        {isEmpty && isTouched && (
+          <Text style={styles.errorMessage}>Input can not be Empty</Text>
+        )}
       </View>
     );
   } else {
@@ -104,6 +116,11 @@ const styles = StyleSheet.create({
   },
   disabledStyle: {
     backgroundColor: Colors.Cream,
+  },
+  errorMessage: {
+    fontFamily: 'open-sans',
+    fontSize: 12,
+    color: 'red',
   },
 });
 

@@ -22,7 +22,7 @@ const ResultCard = (props) => {
       <FlatList
         data={props.resultData}
         renderItem={renderItem}
-        keyExtractor={(item, index) => index}
+        keyExtractor={(item, index) => index.toString()}
       />
     </Card>
   );

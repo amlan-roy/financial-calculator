@@ -34,7 +34,33 @@ export default calculator = (data) => {
         ),
       ];
     case 2:
-      return dummyData;
+      var frequencyOfInvestment = 1;
+      if (data[0] === 'year') {
+        frequencyOfInvestment = 1;
+      } else {
+        frequencyOfInvestment = 12;
+        console.log(data[0]);
+      }
+      const periodicInvestmentAmount = parseInt(data[1]);
+      const rateOfInterest = data[2] / (frequencyOfInvestment * 100);
+      const duration = parseInt(data[3] * frequencyOfInvestment);
+      const maturityAmount =
+        periodicInvestmentAmount *
+        (Math.pow(1 + rateOfInterest, duration) - 1) *
+        ((1 + rateOfInterest) / rateOfInterest);
+
+      return [
+        new ResultData(
+          'Total Profit',
+          (maturityAmount - periodicInvestmentAmount * duration).toFixed(2),
+        ),
+        new ResultData(
+          'Total amount Invested',
+          (periodicInvestmentAmount * duration).toFixed(2),
+        ),
+        new ResultData('Future value', maturityAmount.toFixed(2)),
+      ];
+
     case 3:
       return dummyData;
     case 4:
