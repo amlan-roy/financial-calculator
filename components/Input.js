@@ -1,22 +1,30 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, TextInput, Text, Dimensions } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  TextInput,
+  Text,
+  Dimensions,
+  Keyboard,
+} from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import Colors from '../constants/Colors';
 import { NUMERIC_INPUT, DROPDOWN_INPUT } from '../data/Data';
 
 const height = Dimensions.get('screen').height;
 var dropDownHeight = height * 0.05;
+
 const Input = (props) => {
   const [text, setText] = useState('');
   const [value, setValue] = useState(
     props.dropDownData !== null ? props.dropDownData[0].value : '',
   );
-  const [isEmpty, setIsEmpty] = useState(false);
+  const [isEmpty, setIsEmpty] = useState(true);
   const [isTouched, setIsTouched] = useState(false);
-  //change handler function to set the values in the internal states
+
   const changeHandler = (input) => {
     setIsTouched(true);
-    if (input === '') {
+    if (input.length === 0) {
       setIsEmpty(true);
     } else {
       setIsEmpty(false);
@@ -30,11 +38,21 @@ const Input = (props) => {
   //two useEffects handlers for passing the values to the calculator screen
 
   useEffect(() => {
-    props.onValueChange(text);
+    Keyboard.dismiss();
+  }, [props.dismiss]);
+  useEffect(() => {
+    props.onValueChange(props.index, text);
   }, [text]);
   useEffect(() => {
-    props.onValueChange(value);
+    props.onValueChange(props.index, value);
   }, [value]);
+  useEffect(() => {
+    if (props.type === NUMERIC_INPUT) {
+      props.onValueChange(props.index, text);
+    } else {
+      props.onValueChange(props.index, value);
+    }
+  }, []);
 
   if (props.type == NUMERIC_INPUT) {
     return (
@@ -51,7 +69,9 @@ const Input = (props) => {
             ...styles.textInput,
             ...props.inputStyle,
           }}
+          maxLength={9}
         />
+
         {isEmpty && isTouched && (
           <Text style={styles.errorMessage}>Input can not be Empty</Text>
         )}

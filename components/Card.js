@@ -1,6 +1,12 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { View, Dimensions, StyleSheet, Platform } from 'react-native';
+import {
+  View,
+  Dimensions,
+  StyleSheet,
+  Platform,
+  TouchableOpacity,
+} from 'react-native';
 
 const Card = (props) => {
   const { children, elevation, opacity, cornerRadius } = props;
@@ -28,7 +34,16 @@ const Card = (props) => {
       }),
   })();
 
-  return <View style={[cardStyle.container, props.style]}>{children}</View>;
+  return (
+    <View>
+      <TouchableOpacity
+        onPress={props.onPress}
+        style={[cardStyle.container, props.style]}
+      >
+        {children}
+      </TouchableOpacity>
+    </View>
+  );
 };
 
 Card.prototype = {

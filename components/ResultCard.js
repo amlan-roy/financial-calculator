@@ -17,15 +17,19 @@ const renderItem = (itemData) => {
 };
 
 const ResultCard = (props) => {
-  return (
-    <Card style={styles.card}>
+  var CardData;
+  if (typeof props.resultData === 'string') {
+    CardData = <Text>{props.resultData}</Text>;
+  } else {
+    CardData = (
       <FlatList
         data={props.resultData}
         renderItem={renderItem}
         keyExtractor={(item, index) => index.toString()}
       />
-    </Card>
-  );
+    );
+  }
+  return <Card style={styles.card}>{CardData}</Card>;
 };
 
 const styles = StyleSheet.create({
@@ -51,6 +55,7 @@ const styles = StyleSheet.create({
   resultResult: {
     fontFamily: 'open-sans',
     fontSize: 13,
+    width: '40%',
     color: Colors.Gray,
     paddingHorizontal: 5,
   },

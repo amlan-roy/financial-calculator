@@ -18,12 +18,13 @@ import Background from '../components/Background';
 const MainScreen = (props) => {
   const windowWidth = Dimensions.get('window').width;
 
-  const toCalculator = (title, description, id, url) => {
+  const toCalculator = (title, description, id, url, details) => {
     props.navigation.navigate('Calculator', {
       title: title,
       description: description,
       id: id,
       url: url,
+      details: details,
     });
   };
 
@@ -34,12 +35,13 @@ const MainScreen = (props) => {
         imageUrl={itemData.item.imageUrl}
         title={itemData.item.title}
         description={itemData.item.description}
-        onButtonPress={toCalculator.bind(
+        onPress={toCalculator.bind(
           this,
           itemData.item.title,
           itemData.item.description,
           itemData.item.id,
           itemData.item.imageUrl,
+          itemData.item.detailedDescription,
         )}
       />
     );

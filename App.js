@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Text, StatusBar } from 'react-native';
 import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
 import * as Font from 'expo-font';
 import AppLoading from 'expo-app-loading';
 
+import { CalculatorProvider } from './context/CalculatorScreenContext';
 import AppNavigator from './navigation/AppNavigator';
 import Colors from './constants/Colors';
 

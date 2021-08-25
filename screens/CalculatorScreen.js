@@ -1,5 +1,14 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Text, Image, FlatList } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Text,
+  Image,
+  FlatList,
+  Pressable,
+  Keyboard,
+} from 'react-native';
+
 import Input from '../components/Input';
 import Background from '../components/Background';
 import ResultCard from '../components/ResultCard';
@@ -10,10 +19,9 @@ import calculator from '../calculatorFunctions/Calculators';
 
 const CalculatorScreen = (props) => {
   const [buttonPressed, setButtonPressed] = useState(false);
-  const [isEmpty, setIsEmpty] = useState(false);
+
   const [resultData, setResultData] = useState([]);
-  // setting the first value of "inputValues" as the id of the card/calculator
-  // that we are visiting
+
   const [inputValues, setInputValues] = useState({ id: props.route.params.id });
   const description = props.route.params.description;
   const id = props.route.params.id;
@@ -23,6 +31,12 @@ const CalculatorScreen = (props) => {
     setInputValues({ ...inputValues, [index]: value });
   };
 
+  const toDetails = (details) => {
+    props.navigation.navigate('Details', {
+      title: details.title,
+      body: details.body,
+    });
+  };
   const renderItem = (itemData) => {
     return (
       <View style={styles.inputContainer}>
@@ -37,7 +51,8 @@ const CalculatorScreen = (props) => {
           dropDownContainerStyle={styles.dropDownContainerStyle}
           dropDownDisabledStyle={styles.dropDownDisabledStyle}
           dropDownTextStyle={styles.dropDownTextStyle}
-          onValueChange={inputHandler.bind(this, itemData.index)}
+          index={itemData.index}
+          onValueChange={inputHandler}
         />
       </View>
     );
@@ -45,48 +60,63 @@ const CalculatorScreen = (props) => {
 
   const buttonPressHandler = () => {
     setButtonPressed(true);
-    setResultData(calculator(inputValues));
+    var ret = calculator(inputValues);
+    if (!ret) {
+      setResultData(
+        'We ran into some issues. Please check your input or try again. If problem persists, try contacting the dev.',
+      );
+    } else {
+      setResultData(ret);
+    }
   };
 
   return (
     <Background>
-      <View style={styles.textContainer}>
-        <Text style={styles.subTitle} numberOfLines={4}>
-          {description}
-        </Text>
-      </View>
-      <View style={styles.imageAndLearnMoreContainer}>
-        <Image
-          style={styles.imageStyle}
-          source={{ uri: props.route.params.url }}
-        />
-        <View style={styles.learnMoreContainer}>
-          <CustomButton
-            title="?"
-            onPress={() => {}}
-            buttonStyle={styles.learnMoreButton}
-          />
-          <Text style={styles.learnMoreText}>Learn More</Text>
-        </View>
-      </View>
-      <View style={styles.inputListContainer}>
-        <FlatList
-          data={Data}
-          renderItem={renderItem}
-          keyExtractor={(item, index) => index}
-          numColumns={2}
-          style={styles.flatList}
-        />
-      </View>
-      <View style={styles.buttonContainer}>
-        <CustomButton
-          title="Calculate"
-          onPress={buttonPressHandler}
-          buttonStyle={styles.button}
-          textStyle={{ color: 'black' }}
-        />
-      </View>
-      {buttonPressed && <ResultCard resultData={resultData} />}
+      <Pressable
+        onPress={() => {
+          Keyboard.dismiss();
+        }}
+      >
+        <>
+          <View style={styles.textContainer}>
+            <Text style={styles.subTitle} numberOfLines={4}>
+              {description}
+            </Text>
+          </View>
+          <View style={styles.imageAndLearnMoreContainer}>
+            <Image
+              style={styles.imageStyle}
+              source={{ uri: props.route.params.url }}
+            />
+            <View style={styles.learnMoreContainer}>
+              <CustomButton
+                title="?"
+                onPress={toDetails.bind(this, props.route.params.details)}
+                buttonStyle={styles.learnMoreButton}
+              />
+              <Text style={styles.learnMoreText}>Learn More</Text>
+            </View>
+          </View>
+          <View style={styles.inputListContainer}>
+            <FlatList
+              data={Data}
+              renderItem={renderItem}
+              keyExtractor={(item, index) => index}
+              numColumns={2}
+              style={styles.flatList}
+            />
+          </View>
+          <View style={styles.buttonContainer}>
+            <CustomButton
+              title="Calculate"
+              onPress={buttonPressHandler}
+              buttonStyle={styles.button}
+              textStyle={{ color: 'black' }}
+            />
+          </View>
+          {buttonPressed && <ResultCard resultData={resultData} />}
+        </>
+      </Pressable>
     </Background>
   );
 };

@@ -8,7 +8,10 @@ const CardComponent = (props) => {
   //props needed
   //imageUri, title,description
   return (
-    <Card style={{ ...styles.cardStyle, ...props.style }}>
+    <Card
+      style={{ ...styles.cardStyle, ...props.style }}
+      onPress={props.onPress}
+    >
       <Image source={{ uri: props.imageUrl }} style={styles.image} />
       <View style={styles.textContainer}>
         <Text style={styles.title}>{props.title}</Text>
@@ -19,7 +22,7 @@ const CardComponent = (props) => {
       <View style={styles.buttonContainer}>
         <CustomButton
           title="Calculate"
-          onPress={props.onButtonPress}
+          onPress={props.onPress}
           buttonStyle={styles.button}
           textStyle={{ color: 'black' }}
         />
